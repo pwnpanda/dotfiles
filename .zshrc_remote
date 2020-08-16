@@ -18,7 +18,7 @@ build_dir=$HOME/.xxh/plugins/xxh-plugin-zsh-robin/build
 # https://github.com/xxh/xxh
 # https://github.com/xxh/xxh-plugin-zsh-powerlevel10k
 # Antigen
-# Installed in /opt - https://github.com/zsh-users/antigen
+# Installed - https://github.com/zsh-users/antigen
 source $build_dir/antigen.zsh
 #antigen theme bhilburn/powerlevel9k powerlevel9k
 antigen theme romkatv/powerlevel10k
@@ -138,10 +138,10 @@ function signapk {
 }
 
 # Source aliases
-source ~/.zsh_alias
+source $build_dir/.zsh_alias
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f $build_dir/.p10k.zsh ]] || source $build_dir/.p10k.zsh
 
-sleep(1)
+sleep 1
 sudo run-parts /etc/update-motd.d
