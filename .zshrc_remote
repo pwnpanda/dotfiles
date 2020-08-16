@@ -116,6 +116,27 @@ if [ -f $1 ] ; then
  fi
 }
 
+# Windows specific
+function subl {
+  # https://stackoverflow.com/questions/40135502/opening-sublime-text-from-bash-on-ubuntu-on-windows
+  subl=/mnt/c/Program\ Files/Sublime\ Text\ 3/subl.exe
+  if [ "$1" != "" ]; then
+    $subl $1
+  else
+    $subl $PWD
+  fi
+}
+
+
+# signing APKs
+function signapk {
+  if [ "$1" != "" ]; then
+    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ~/.androkey/my-release-key.keystore $1 key
+  else
+    echo "Please add apk file as arg 1"
+  fi
+}
+
 # Source aliases
 source ~/.zsh_alias
 
