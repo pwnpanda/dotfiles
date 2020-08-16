@@ -13,7 +13,7 @@ export EDITOR="vim"
 export LC_CTYPE="en_US.UTF-8"
 export TERM="xterm-256color"
 
-build_dir=$HOME/.xxh/.xxh/plugins/xxh-plugin-zsh-robin/build
+build_dir=$HOME/.xxh/plugins/xxh-plugin-zsh-robin/build
 
 # https://github.com/xxh/xxh
 # https://github.com/xxh/xxh-plugin-zsh-powerlevel10k
@@ -24,10 +24,10 @@ source $build_dir/antigen.zsh
 antigen theme romkatv/powerlevel10k
 
 # Plugins
-# highlighting in /opt - https://github.com/zsh-users/zsh-syntax-highlighting
-source $build_dir/opt/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# autocomplete in /opt - https://github.com/zsh-users/zsh-autosuggestions
-source $build_dir/opt/zsh-autosuggestions/zsh-autosuggestions.zsh
+# highlighting in - https://github.com/zsh-users/zsh-syntax-highlighting
+source $build_dir/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# autocomplete - https://github.com/zsh-users/zsh-autosuggestions
+source $build_dir/zsh-autosuggestions/zsh-autosuggestions.zsh
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator history time battery)
 POWERLEVEL9K_MODE="nerdfont-complete"
 POWERLEVEL9K_USER_ROOT_ICON=$'\uF198'
