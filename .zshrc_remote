@@ -19,7 +19,7 @@ build_dir=$HOME/.xxh/.xxh/plugins/xxh-plugin-zsh-robin/build
 # https://github.com/xxh/xxh-plugin-zsh-powerlevel10k
 # Antigen
 # Installed in /opt - https://github.com/zsh-users/antigen
-source $build_dir/opt/antigen.zsh
+source $build_dir/antigen.zsh
 #antigen theme bhilburn/powerlevel9k powerlevel9k
 antigen theme romkatv/powerlevel10k
 
