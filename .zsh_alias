@@ -1,9 +1,10 @@
 # Aliases
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -alF --color=always'
 alias la='ls -A'
 alias l='ls -CF'
+alias ls="ls --color=always -F"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -24,38 +25,7 @@ alias python=python3
 alias pyhton=python3
 alias top="htop"
 
-#logs
-alias log="cd /var/log"
-
-#nginx
-alias nx="cd /etc/nginx/"
-alias nxlog="less /var/log/nginx/error.log"
-alias nxserr="less /var/log/nginx/error.server.log"
-alias nxslog="less /var/log/nginx/access.server.log"
-alias nxrs="sudo systemctl restart nginx"
-alias nxsta="sudo systemctl status nginx"
-alias nxlog2="sudo journalctl -u nginx"
-alias nxt="sudo nginx -t"
-
-#Mail
-alias mail="ls /var/mail/"
-alias gmail="cd /var/mail/"
-alias rmail="less /var/mail/root"
-
-#sysLog
-alias loo="sudo nano /etc/systemd/system/logServer.service"
-alias lors="sudo systemctl restart logServer"
-alias lostop="sudo systemctl stop logServer"
-alias lostart="sudo systemctl start logServer"
-alias lostat="sudo systemctl status logServer"
-alias loj="sudo journalctl -u logServer"
-alias lolog="sudo less /var/log/logserver_Run.log"
-alias lologe="sudo less /var/log/logserver_Error.log"
-
-#Run proxy
-alias proxydetails="Runs on 8888, webfront on 95.216.209.250:8889"
-alias killproxy="pkill -9 mitmweb"
-alias proxy="mitmweb -s /root/mitmproxy/mitm.py --anticache --listen-host 0.0.0.0 -p 8888 --set block_global=false --web-port 8889 --web-iface 95.216.209.250 >/root/mitmproxy/logs/`print -P "%D{%Y-%m-%d_%H:%M:%S}"` &"
+alias takeover="tmux detach -a"
 
 # Working:
 # mitmweb -s mitm.py --anticache --listen-host 0.0.0.0 -p 8888 --set block_global=false --web-port 8889 --web-iface 95.216.209.250
@@ -75,14 +45,20 @@ alias fd="fdfind"
 #Alias for own script
 alias getgeo="~/getgeo.sh"
 # Alias for bat
-alias catt="bat"
+alias catt="batcat"
 
 # Aliases for random stuff
-alias reload='source $build_dir/.p10k.zsh'
+alias resource="source ~/.zsh_alias"
+alias reload='source ~/.p10k.zsh'
 alias lsof="lsof -n"
-#alias ssh="xxh"
+alias ssx="xxh"
 alias gpull='git pull --rebase && git submodule update --init --recursive'
 alias diff="diff --color"
+alias locatedb="sudo /usr/libexec/locate.updatedb"
+alias locate.updatedb="sudo /usr/libexec/locate.updatedb"
+alias updatedb="sudo /usr/libexec/locate.updatedb"
+alias ssh="ssh -o IdentitiesOnly=yes"
+alias getports="sudo lsof -PiTCP -sTCP:LISTEN"
 
 # taken from https://natelandau.com/my-mac-osx-bash_profile/
 alias cp='cp -iv'                           # Preferred 'cp' implementation
@@ -95,9 +71,13 @@ alias ..='cd ../'                           # Go back 1 directory level
 alias which='type -all'                     # which:        Find executables
 alias cic='set completion-ignore-case On'   # cic:          Make tab-completion case-insensitive
 alias myip='curl ip.appspot.com'                    # myip:         Public facing IP Address
+alias myip1='curl ip.appspot.com'                    # myip:         Public facing IP Address
+alias myip2="curl -s api.infoip.io/ip"      # Pub IP
 
 function ta() {
         # attach to tmux session given as argument
         tmux attach-session -t $1
 }
 
+# Add pip binaries to path
+export PATH="$PATH:~/.local/bin/"

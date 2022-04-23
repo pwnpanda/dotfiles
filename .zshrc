@@ -13,13 +13,13 @@ export EDITOR="vim"
 export LC_CTYPE="en_US.UTF-8"
 export TERM="xterm-256color"
 
-build_dir=$HOME/.xxh/plugins/xxh-plugin-zsh-robin/build
+build_dir=/opt
 
 # https://github.com/xxh/xxh
 # https://github.com/xxh/xxh-plugin-zsh-powerlevel10k
 # Antigen
 # Installed - https://github.com/zsh-users/antigen
-source $build_dir/antigen.zsh
+source $build_dir/antigen/antigen.zsh
 #antigen theme bhilburn/powerlevel9k powerlevel9k
 antigen theme romkatv/powerlevel10k
 
@@ -86,6 +86,19 @@ bindkey "^[[B" down-line-or-beginning-search
 bindkey "\e[1;3D" backward-word
 bindkey "\e[1;3C" forward-word
 
+precmd() {
+  # sets the tab title to current dir
+  currentdir=("${(@s:/:)PWD}")
+  slashes=$(tr -dc '/' <<<"$PWD"|wc -c)
+  slashes=$(echo $slashes | xargs)
+  if [[ $slashes < 3 ]] {
+      currentdir="$PWD"
+  } else {
+      currentdir="/${currentdir[-2]}/${currentdir[-1]}"
+  }
+  echo -ne "\e]1;$currentdir\a"
+}
+
 function list_all() {
     emulate -L zsh
     ls -la --color=always
@@ -116,17 +129,6 @@ if [ -f $1 ] ; then
  fi
 }
 
-# Windows specific
-function subl {
-  # https://stackoverflow.com/questions/40135502/opening-sublime-text-from-bash-on-ubuntu-on-windows
-  subl=/mnt/c/Program\ Files/Sublime\ Text\ 3/subl.exe
-  if [ "$1" != "" ]; then
-    $subl $1
-  else
-    $subl $PWD
-  fi
-}
-
 
 # signing APKs
 function signapk {
@@ -138,9 +140,18 @@ function signapk {
 }
 
 # Source aliases
-source $build_dir/.zsh_alias
+source ~/.zsh_alias
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f $build_dir/.p10k.zsh ]] || source $build_dir/.p10k.zsh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 sudo run-parts /etc/update-motd.d
+
+# Ruby env manager
+eval "$(rbenv init -)"
+
+# Nvm config
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
