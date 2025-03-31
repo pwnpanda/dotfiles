@@ -57,6 +57,7 @@ autoload -Uz compinit
 compinit
 
 set LSCOLORS
+LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 export CLICOLOR=1
 export CLICOLOR_FORCE=1
 
@@ -129,15 +130,8 @@ if [ -f $1 ] ; then
  fi
 }
 
-
-# signing APKs
-function signapk {
-  if [ "$1" != "" ]; then
-    jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ~/.androkey/my-release-key.keystore $1 key
-  else
-    echo "Please add apk file as arg 1"
-  fi
-}
+#Init atuin
+antigen bundle atuinsh/atuin@main
 
 # Source aliases
 source ~/.zsh_alias
@@ -146,12 +140,4 @@ source ~/.zsh_alias
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 sudo run-parts /etc/update-motd.d
-
-# Ruby env manager
-eval "$(rbenv init -)"
-
-# Nvm config
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
